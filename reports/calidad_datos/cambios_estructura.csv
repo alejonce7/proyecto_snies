@@ -1,0 +1,30 @@
+﻿tipo,categoria,año_anterior,año_actual,archivo,valor_anterior,valor_actual,descripcion
+cambio_num_columnas,inscritos,2000,2014,articles-391561_recurso.xlsx,105,33,Cambio de 105 a 33 columnas
+cambio_num_columnas,inscritos,2018,2019,articles-401907_recurso.xlsx,33,39,Cambio de 33 a 39 columnas
+cambio_num_columnas,inscritos,2022,2023,articles-421538_recurso.xlsx,39,41,Cambio de 39 a 41 columnas
+cambio_num_columnas,admitidos,2007,2014,articles-391567_recurso.xlsx,61,33,Cambio de 61 a 33 columnas
+cambio_num_columnas,admitidos,2018,2019,articles-401905_recurso.xlsx,33,39,Cambio de 33 a 39 columnas
+cambio_num_columnas,admitidos,2022,2023,articles-421540_recurso.xlsx,39,41,Cambio de 39 a 41 columnas
+cambio_num_columnas,primer_curso,2000,2014,articles-391573_recurso.xlsx,103,33,Cambio de 103 a 33 columnas
+cambio_num_columnas,primer_curso,2018,2019,articles-401909_recurso.xlsx,33,38,Cambio de 33 a 38 columnas
+cambio_num_columnas,primer_curso,2019,2020,articles-406672_recurso.xlsx,38,39,Cambio de 38 a 39 columnas
+cambio_num_columnas,primer_curso,2020,2021,articles-411254_recurso.xlsx,39,41,Cambio de 39 a 41 columnas
+cambio_significativo_filas,matriculados,2000,2014,articles-391579_recurso.xlsx,38328,60838,Cambio de 38328 a 60838 filas (59%)
+cambio_num_columnas,matriculados,2000,2014,articles-391579_recurso.xlsx,103,33,Cambio de 103 a 33 columnas
+cambio_num_columnas,matriculados,2018,2019,articles-401908_recurso.xlsx,33,39,Cambio de 33 a 39 columnas
+cambio_num_columnas,matriculados,2020,2021,articles-411252_recurso.xlsx,39,41,Cambio de 39 a 41 columnas
+cambio_significativo_filas,graduados,2017,2018,articles-391581_recurso.xlsx,388772,40517,Cambio de 388772 a 40517 filas (90%)
+cambio_num_columnas,graduados,2018,2019,articles-401906_recurso.xlsx,33,39,Cambio de 33 a 39 columnas
+cambio_num_columnas,graduados,2020,2021,articles-411250_recurso.xlsx,39,41,Cambio de 39 a 41 columnas
+cambio_num_columnas,docentes,2007,2014,articles-391586_recurso.xlsx,29,24,Cambio de 29 a 24 columnas
+cambio_num_columnas,docentes,2015,2016,articles-391584_recurso.xlsx,24,23,Cambio de 24 a 23 columnas
+cambio_num_columnas,docentes,2018,2019,articles-401904_recurso.xlsx,23,26,Cambio de 23 a 26 columnas
+cambio_num_columnas,docentes,2019,2020,articles-406665_recurso.xlsx,26,23,Cambio de 26 a 23 columnas
+cambio_num_columnas,docentes,2021,2022,articles-416249_recurso.xlsx,23,24,Cambio de 23 a 24 columnas
+cambio_significativo_filas,administrativos,2003,2014,articles-391592_recurso.xlsx,342,694,Cambio de 342 a 694 filas (103%)
+cambio_num_columnas,administrativos,2003,2014,articles-391592_recurso.xlsx,119,19,Cambio de 119 a 19 columnas
+cambio_significativo_filas,administrativos,2016,2017,articles-391589_recurso.xlsx,342,1062,Cambio de 342 a 1062 filas (211%)
+cambio_significativo_filas,administrativos,2017,2018,articles-391588_recurso.xlsx,1062,432,Cambio de 1062 a 432 filas (59%)
+cambio_significativo_filas,administrativos,2018,2019,articles-401903_recurso.xlsx,432,1779,Cambio de 432 a 1779 filas (312%)
+cambio_significativo_filas,administrativos,2019,2020,articles-406664_recurso.xlsx,1779,546,Cambio de 1779 a 546 filas (69%)
+cambio_num_columnas,administrativos,2022,2023,articles-421537_recurso.xlsx,19,20,Cambio de 19 a 20 columnas

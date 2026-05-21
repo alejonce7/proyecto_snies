@@ -1,0 +1,136 @@
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv/
+venv/
+ENV/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+pyrightconfig.json
+
+# ============================================================
+# Datos (NO subir archivos grandes)
+# ============================================================
+data/raw/*.xlsx
+data/raw/*.xlsb
+data/database/*.duckdb
+data/database/*.db
+data/database/*.sqlite
+data/processed/*.csv
+data/processed/*.parquet
+*.xlsx
+*.xlsb
+*.duckdb
+*.db
+
+# ============================================================
+# Reportes generados
+# ============================================================
+reports/calidad_datos/*.json
+reports/calidad_datos/*.csv
+reports/calidad_datos/*.xlsx
+reports/dashboards/
+*.log
+
+# ============================================================
+# Notebooks (opcional - si quieres limpiar outputs)
+# ============================================================
+notebooks/.ipynb_checkpoints/
+notebooks/*.ipynb
+!notebooks/README.md
+
+# ============================================================
+# IDE y editores
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.desktop.ini
+*.sublime-*
+.project
+.pydevproject
+.settings/
+*.iml
+
+# ============================================================
+# Jupyter
+# ============================================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+.ipynb_checkpoints/*
+!*.ipynb
+
+# ============================================================
+# Archivos de configuración local
+# ============================================================
+.env
+.env.local
+.env.*.local
+config.local.py
+*.local.py
+
+# ============================================================
+# Archivos de respaldo
+# ============================================================
+*.bak
+*.backup
+*.tmp
+*.temp
+*.orig
+*.rej
+
+# ============================================================
+# Logs
+# ============================================================
+logs/
+*.log
+*.log.*
+
+# ============================================================
+# Archivos de prueba
+# ============================================================
+test_*.py
+*_test.py
+tests/__pycache__/
+tests/.pytest_cache/
+
+# ============================================================
+# Archivos comprimidos (si los generas)
+# ============================================================
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+
+# ============================================================
+# Configuración de desarrollo
+# ============================================================
+.virtualenv
+.virt
+.venv
+.venv.bak
+.python-version
+*.egg-info/
+*.egg
+dist/
+build/
+MANIFEST

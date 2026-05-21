@@ -44,6 +44,7 @@ def crear_esquema():
             ies_padre VARCHAR(20),
             sector VARCHAR(50),
             caracter VARCHAR(50),
+            metodologia VARCHAR(50),
             principal_seccional VARCHAR(20),
             estado VARCHAR(20) DEFAULT 'ACTIVO'
         )

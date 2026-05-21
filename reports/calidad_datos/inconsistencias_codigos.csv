@@ -1,0 +1,26 @@
+﻿tipo,categoria,año_anterior,año_actual,codigos,descripcion
+codigos_desaparecidos,admitidos,2018,2019,['1101'],1 códigos dejaron de aparecer
+codigos_nuevos,admitidos,2018,2019,"['2731', '1706', '4813', '1728', '4112', '9105', '1835', '3817', '9110', '4709']",14 códigos nuevos aparecen
+codigos_desaparecidos,admitidos,2019,2020,"['2731', '1706', '4813', '1728', '4112', '9105', '1835', '3817', '9110', '4709']",14 códigos dejaron de aparecer
+codigos_nuevos,admitidos,2019,2020,['1101'],1 códigos nuevos aparecen
+codigos_desaparecidos,graduados,2018,2019,['1101'],1 códigos dejaron de aparecer
+codigos_nuevos,graduados,2018,2019,"['3718', '1701', '1722']",3 códigos nuevos aparecen
+codigos_desaparecidos,graduados,2019,2020,"['3718', '1701', '1722']",3 códigos dejaron de aparecer
+codigos_nuevos,graduados,2019,2020,['1101'],1 códigos nuevos aparecen
+codigos_desaparecidos,administrativos,2003,2014,"['1107', '1118', '1117', '1104', '1114', '1110', '1112', '1103', '1113', '1102']",16 códigos dejaron de aparecer
+codigos_nuevos,administrativos,2003,2014,"['3116', '1124', '1217', '3201', '3107', '3204', '2208', '2906', '1215', '9101']",16 códigos nuevos aparecen
+codigos_desaparecidos,administrativos,2014,2015,"['3116', '1121', '1217', '3201', '3107', '3204', '2208', '2906', '1215', '9101']",16 códigos dejaron de aparecer
+codigos_nuevos,administrativos,2014,2015,"['1126', '1104', '1114', '1110', '1101', '1103', '1102', '1119', '1118', '1111']",11 códigos nuevos aparecen
+codigos_desaparecidos,administrativos,2015,2016,"['1124', '1126', '1104', '1114', '1110', '1101', '1103', '1106', '1115', '1125']",15 códigos dejaron de aparecer
+codigos_nuevos,administrativos,2015,2016,"['9107', '4101', '4112', '3204', '9103', '2904', '3107', '9105', '9102', '3303']",20 códigos nuevos aparecen
+codigos_desaparecidos,administrativos,2016,2017,"['9107', '4101', '4112', '3204', '9103', '2904', '3107', '9105', '9102', '3303']",20 códigos dejaron de aparecer
+codigos_nuevos,administrativos,2016,2017,"['1702', '1729', '1201', '1110', '1206', '1701', '1108', '1806', '1105', '1722']",10 códigos nuevos aparecen
+codigos_desaparecidos,administrativos,2017,2018,"['1702', '1729', '1201', '1206', '1701', '1108', '1806', '1722']",8 códigos dejaron de aparecer
+codigos_nuevos,administrativos,2017,2018,"['1104', '1114', '1101', '1112', '1103', '1115', '1102', '1119', '1111', '1117']",10 códigos nuevos aparecen
+codigos_desaparecidos,administrativos,2018,2019,"['1104', '1114', '1110', '1112', '1103', '1101', '1115', '1102', '1119', '1111']",12 códigos dejaron de aparecer
+codigos_nuevos,administrativos,2018,2019,"['1827', '2831', '2738', '1107', '2712', '2102', '1808', '2709', '4837', '4801']",10 códigos nuevos aparecen
+codigos_desaparecidos,administrativos,2019,2020,"['1827', '2831', '2738', '2712', '2102', '1808', '2709', '4837', '4801']",9 códigos dejaron de aparecer
+codigos_nuevos,administrativos,2019,2020,"['1104', '1110', '1103', '1106', '1102', '1108', '1111', '1109', '1105', '1101']",10 códigos nuevos aparecen
+codigos_desaparecidos,administrativos,2020,2021,['1111'],1 códigos dejaron de aparecer
+codigos_desaparecidos,administrativos,2022,2023,"['1107', '1104', '1110', '1103', '1106', '1102', '1108', '1109', '1105', '1101']",10 códigos dejaron de aparecer
+codigos_nuevos,administrativos,2022,2023,"['17', '15', '11', '19', '05', '76']",6 códigos nuevos aparecen

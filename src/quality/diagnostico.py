@@ -24,8 +24,8 @@ except ImportError:
 # ============================================================
 # CONFIGURACIÓN
 # ============================================================
-CARPETA_DATOS = Path("./datos_snies")  # Cambia a tu ruta
-REPORTE_SALIDA = Path("./reporte_calidad_snies")
+CARPETA_DATOS = Path("./data/raw")  
+REPORTE_SALIDA = Path("./reports/calidad_datos")
 
 # Patrones para detectar año en los datos
 PATRONES_AÑO = [r'\b(200[0-9]|201[0-9]|202[0-6])\b']
