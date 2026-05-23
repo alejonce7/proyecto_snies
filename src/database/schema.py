@@ -1,32 +1,24 @@
 # database/schema.py
 import duckdb
-import pandas as pd
 from pathlib import Path
 
-# Configuración
-DB_PATH = Path("./data/snies.duckdb")
-DB_PATH.parent.mkdir(exist_ok=True)
+DB_PATH = Path("./data/database/snies.duckdb")
+DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 def conectar_db():
-    """Conecta a la base de datos DuckDB"""
     return duckdb.connect(str(DB_PATH))
 
 def crear_esquema():
-    """Crea todas las tablas del modelo estrella"""
-    
     conn = conectar_db()
-    
-    # 1. DIMENSIÓN: Tiempo
+
+    # 1. DIMENSION TIEMPO
     conn.execute("""
         CREATE TABLE IF NOT EXISTS dim_tiempo (
-            año INTEGER PRIMARY KEY,
-            periodo VARCHAR(20),
-            semestre INTEGER,
-            fecha_corte DATE
+            año INTEGER PRIMARY KEY
         )
     """)
-    
-    # 2. DIMENSIÓN: Categoría SNIES
+
+    # 2. DIMENSION CATEGORIA
     conn.execute("""
         CREATE TABLE IF NOT EXISTS dim_categoria (
             id_categoria INTEGER PRIMARY KEY,
@@ -35,8 +27,8 @@ def crear_esquema():
             unidad_medida VARCHAR(50)
         )
     """)
-    
-    # 3. DIMENSIÓN: Institución (IES)
+
+    # 3. DIMENSION IES
     conn.execute("""
         CREATE TABLE IF NOT EXISTS dim_ies (
             codigo_ies VARCHAR(20) PRIMARY KEY,
@@ -49,8 +41,8 @@ def crear_esquema():
             estado VARCHAR(20) DEFAULT 'ACTIVO'
         )
     """)
-    
-    # 4. DIMENSIÓN: Programa
+
+    # 4. DIMENSION PROGRAMA
     conn.execute("""
         CREATE TABLE IF NOT EXISTS dim_programa (
             id_programa VARCHAR(50) PRIMARY KEY,
@@ -61,8 +53,8 @@ def crear_esquema():
             FOREIGN KEY (codigo_ies) REFERENCES dim_ies(codigo_ies)
         )
     """)
-    
-    # 5. DIMENSIÓN: Ubicación (Departamentos y Municipios)
+
+    # 5. DIMENSION UBICACION
     conn.execute("""
         CREATE TABLE IF NOT EXISTS dim_ubicacion (
             id_ubicacion VARCHAR(20) PRIMARY KEY,
@@ -73,7 +65,7 @@ def crear_esquema():
             nombre_departamento VARCHAR(255)
         )
     """)
-    
+
     # 6. TABLA DE HECHOS
     conn.execute("""
         CREATE TABLE IF NOT EXISTS hecho_snies (
@@ -95,64 +87,57 @@ def crear_esquema():
             FOREIGN KEY (id_municipio) REFERENCES dim_ubicacion(id_ubicacion)
         )
     """)
-    
-    # Crear índices para consultas rápidas
+
+    # Indices
     conn.execute("CREATE INDEX IF NOT EXISTS idx_hecho_año ON hecho_snies(año)")
     conn.execute("CREATE INDEX IF NOT EXISTS idx_hecho_categoria ON hecho_snies(id_categoria)")
     conn.execute("CREATE INDEX IF NOT EXISTS idx_hecho_ies ON hecho_snies(codigo_ies)")
-    
-    # Poblar dim_categoria con valores iniciales
+
+    # Poblar dim_categoria
     conn.execute("""
         INSERT OR IGNORE INTO dim_categoria (id_categoria, nombre, descripcion, unidad_medida) VALUES
-        (1, 'inscritos', 'Estudiantes que se inscribieron en educación superior', 'número de personas'),
-        (2, 'admitidos', 'Estudiantes admitidos en educación superior', 'número de personas'),
-        (3, 'matriculados', 'Estudiantes matriculados en educación superior', 'número de personas'),
-        (4, 'primer_curso', 'Estudiantes matriculados en primer curso', 'número de personas'),
-        (5, 'graduados', 'Estudiantes graduados en educación superior', 'número de personas'),
-        (6, 'docentes', 'Personal docente en IES', 'número de personas'),
-        (7, 'administrativos', 'Personal administrativo en IES', 'número de personas')
+        (1, 'inscritos', 'Estudiantes que se inscribieron en educacion superior', 'numero de personas'),
+        (2, 'admitidos', 'Estudiantes admitidos en educacion superior', 'numero de personas'),
+        (3, 'matriculados', 'Estudiantes matriculados en educacion superior', 'numero de personas'),
+        (4, 'primer_curso', 'Estudiantes matriculados en primer curso', 'numero de personas'),
+        (5, 'graduados', 'Estudiantes graduados en educacion superior', 'numero de personas'),
+        (6, 'docentes', 'Personal docente en IES', 'numero de personas'),
+        (7, 'administrativos', 'Personal administrativo en IES', 'numero de personas')
     """)
-    
-    conn.close()
-    print("✅ Esquema de base de datos creado exitosamente")
 
-def cargar_dimension_tiempo(años=None):
-    """Carga los años en la dimensión tiempo"""
-    if años is None:
-        años = list(range(2000, 2027))  # 2000 a 2026
-    
-    conn = conectar_db()
-    for año in años:
-        conn.execute("""
-            INSERT OR IGNORE INTO dim_tiempo (año, semestre) 
-            VALUES (?, NULL)
-        """, [año])
-    
+    # Poblar dim_tiempo (2000-2030)
+    for año in range(2000, 2031):
+        conn.execute("INSERT OR IGNORE INTO dim_tiempo (año) VALUES (?)", [año])
+
     conn.close()
-    print(f"✅ Cargados {len(años)} años en dim_tiempo")
+    print("Esquema de base de datos creado exitosamente")
 
 def verificar_esquema():
-    """Muestra el estado de las tablas"""
     conn = conectar_db()
-    
+
     tablas = conn.execute("""
-        SELECT table_name 
-        FROM information_schema.tables 
+        SELECT table_name
+        FROM information_schema.tables
         WHERE table_schema = 'main'
         ORDER BY table_name
     """).fetchall()
-    
-    print("\n📋 Tablas en la base de datos:")
-    for tabla in tablas:
-        count = conn.execute(f"SELECT COUNT(*) FROM {tabla[0]}").fetchone()[0]
-        print(f"   ✅ {tabla[0]}: {count} registros")
-    
+
+    print("\nTablas en la base de datos:")
+    for (tabla,) in tablas:
+        count = conn.execute(f"SELECT COUNT(*) FROM {tabla}").fetchone()[0]
+        print(f"  {tabla}: {count} registros")
+
     conn.close()
 
-# ============================================================
-# EJECUCIÓN
-# ============================================================
+def resetear_esquema():
+    conn = conectar_db()
+    tablas = ["hecho_snies", "dim_programa", "dim_ies", "dim_ubicacion", "dim_categoria", "dim_tiempo"]
+    for t in tablas:
+        conn.execute(f"DROP TABLE IF EXISTS {t}")
+    conn.close()
+    print("Esquema eliminado")
+    crear_esquema()
+
 if __name__ == "__main__":
     crear_esquema()
-    cargar_dimension_tiempo()
     verificar_esquema()
