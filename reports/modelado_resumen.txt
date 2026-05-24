@@ -1,0 +1,113 @@
+==========================================================================
+FASE 3 — MODELAMIENTO DE MACHINE LEARNING · SNIES
+==========================================================================
+
+▶ 0. CARGA Y LIMPIEZA
+  Dataset base: 8805 filas × 20 columnas (IES-año, 2000-2024)
+  Departamentos: 84 crudos → 39 normalizados
+  Sector conocido: 469 de 8805 (5%) → se excluye del modelo, se usa solo como descriptor
+
+==========================================================================
+A. MODELO SUPERVISADO — Predicción de la tasa de graduación
+==========================================================================
+
+▶ A.1 PREPARACIÓN
+  Filtro 2018-2024 + tasa_graduacion en (0,1]: 2161 observaciones
+  (se descartaron 6 filas con tasa > 1.0, físicamente imposibles)
+  Variables predictoras (NO incluye 'graduados' → evita fuga de información):
+     [num] log_matriculados
+     [num] log_docentes
+     [num] ratio_docente_estudiante
+     [num] tasa_admision
+     [num] tasa_matricula_admitidos
+     [num] num_programas
+     [num] crecimiento_matricula
+     [cat] departamento_norm (one-hot)
+  Variable objetivo: tasa_graduacion  (graduados / matriculados)
+
+  Split TEMPORAL (evita fuga del futuro):
+     Entrenamiento 2018-2022: 1536 filas
+     Holdout       2023-2024: 625 filas
+
+▶ A.2 ENTRENAMIENTO Y COMPARACIÓN DE 3 ALGORITMOS
+
+  ── Regresión Lineal ──
+     CV(5) R²:  0.092 ± 0.095
+     R² train:  0.182   |   R² holdout: 0.191   (gap=-0.009)
+     RMSE holdout: 0.0829   MAE holdout: 0.0529
+
+  ── Random Forest ──
+     CV(5) R²:  0.311 ± 0.043
+     R² train:  0.484   |   R² holdout: 0.326   (gap=+0.159)
+     RMSE holdout: 0.0757   MAE holdout: 0.0504
+
+  ── Gradient Boosting ──
+     CV(5) R²:  0.308 ± 0.046
+     R² train:  0.593   |   R² holdout: 0.247   (gap=+0.345)
+     RMSE holdout: 0.0800   MAE holdout: 0.0546
+
+▶ A.3 MODELO SELECCIONADO: Random Forest
+     Justificación: mejor R² en holdout (0.326) con menor RMSE (0.0757).
+     Baseline (predecir la media): RMSE = 0.0929 → el modelo lo supera.
+
+▶ A.4 IMPORTANCIA DE VARIABLES (permutación, holdout):
+     crecimiento_matricula          +0.3028
+     tasa_matricula_admitidos       +0.1350
+     log_matriculados               +0.0462
+     num_programas                  +0.0280
+     log_docentes                   +0.0184
+     departamento_norm              +0.0181
+     ratio_docente_estudiante       +0.0065
+     tasa_admision                  -0.0005
+
+  ✅ Modelo guardado: models/modelo_regresion_tasa_graduacion.joblib
+  ✅ 13_comparacion_modelos_regresion.png
+  ✅ 14_predicho_vs_real.png
+  ✅ 15_importancia_variables.png
+
+==========================================================================
+B. MODELO NO SUPERVISADO — Segmentación (clustering) de IES
+==========================================================================
+
+▶ B.1 PREPARACIÓN
+  IES con perfil completo (2022-2024): 323
+  Variables de segmentación: log_matriculados, ratio_docente_estudiante, tasa_graduacion, num_programas
+  Normalización: StandardScaler (media 0, desv 1) — obligatorio para distancias
+
+▶ B.2 SELECCIÓN DEL NÚMERO DE CLÚSTERES (KMeans)
+     k=2: inercia=   871.6  silhouette=0.539
+     k=3: inercia=   588.6  silhouette=0.447
+     k=4: inercia=   437.1  silhouette=0.472
+     k=5: inercia=   324.3  silhouette=0.384
+     k=6: inercia=   272.1  silhouette=0.379
+     k=7: inercia=   223.4  silhouette=0.368
+     k=8: inercia=   197.5  silhouette=0.375
+  → k óptimo por silhouette puro: 2 (silhouette=0.539)
+  → k SELECCIONADO: 3. Justificación: k=2 solo separa unas pocas
+     micro-IES de un macro-grupo heterogéneo (valor de negocio limitado).
+     k=3 mantiene silhouette en zona razonable (0.447),
+     coincide con el codo de la inercia y produce 3 arquetipos accionables.
+  ✅ 16_elbow_silhouette.png
+
+▶ B.3 COMPARACIÓN DE ALGORITMOS DE CLUSTERING (k=3)
+     KMeans (k=3):        silhouette=0.447
+     Agglomerative (k=3): silhouette=0.411
+     DBSCAN (eps=1.2):       silhouette=0.684  (2 clústeres, 15 IES de ruido)
+  → Seleccionado: KMeans. DBSCAN logra mayor silhouette pero descarta 15 IES como 'ruido' y colapsa a 2 grupos; KMeans asigna
+     TODAS las IES a 3 arquetipos interpretables y accionables (silhouette ≈ Agglomerative).
+
+▶ B.4 PERFIL DE LOS CLÚSTERES (medianas):
+ cluster               arquetipo  n_ies  matriculados_med  docentes_med  ratio_doc_est  tasa_graduacion  num_programas
+       0            Mega-masivas     68      31323.500000   2488.333333       0.077340         0.116643          133.0
+       1  Medianas tradicionales    226       4646.666667    314.500000       0.081853         0.119177           25.0
+       2 Pequeñas especializadas     29        127.000000     43.333333       0.450353         0.311352            5.0
+
+  Sector predominante por clúster (donde se conoce):
+     Clúster 0: sector desconocido
+     Clúster 1: PRIVADO (81% de 16 IES con sector conocido)
+     Clúster 2: PRIVADO (75% de 4 IES con sector conocido)
+
+  ✅ Asignaciones guardadas: data/dataset/ies_clusters.csv
+  ✅ Modelo guardado: models/modelo_clustering_ies.joblib
+  ✅ 17_perfiles_cluster_heatmap.png
+  ✅ 18_clusters_scatter.png

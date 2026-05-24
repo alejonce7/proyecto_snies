@@ -1,0 +1,163 @@
+{
+  "supervisado": {
+    "n_train": 1536,
+    "n_test": 625,
+    "features": [
+      "log_matriculados",
+      "log_docentes",
+      "ratio_docente_estudiante",
+      "tasa_admision",
+      "tasa_matricula_admitidos",
+      "num_programas",
+      "crecimiento_matricula",
+      "departamento_norm"
+    ],
+    "target": "tasa_graduacion",
+    "resultados": [
+      {
+        "modelo": "Regresión Lineal",
+        "cv_r2_mean": 0.09218903982168598,
+        "cv_r2_std": 0.0953660703289775,
+        "cv_rmse_mean": 0.08341883120022617,
+        "r2_train": 0.18194745724174521,
+        "r2_holdout": 0.19133110141853815,
+        "rmse_holdout": 0.08292209710087237,
+        "mae_holdout": 0.05289353207454449,
+        "gap_overfit": -0.009383644176792938
+      },
+      {
+        "modelo": "Random Forest",
+        "cv_r2_mean": 0.31118652172974076,
+        "cv_r2_std": 0.042803691565233865,
+        "cv_rmse_mean": 0.0725309492348549,
+        "r2_train": 0.48417692927278067,
+        "r2_holdout": 0.32566780304964105,
+        "rmse_holdout": 0.0757219613852431,
+        "mae_holdout": 0.050439146631214175,
+        "gap_overfit": 0.15850912622313962
+      },
+      {
+        "modelo": "Gradient Boosting",
+        "cv_r2_mean": 0.30807216787506153,
+        "cv_r2_std": 0.045793222726203085,
+        "cv_rmse_mean": 0.07270434652377336,
+        "r2_train": 0.5925253634653025,
+        "r2_holdout": 0.2474900108674647,
+        "rmse_holdout": 0.07999098437828747,
+        "mae_holdout": 0.05463035556657419,
+        "gap_overfit": 0.3450353525978378
+      }
+    ],
+    "baseline_rmse_media": 0.09290357635850713,
+    "mejor_modelo": "Random Forest",
+    "importancia": [
+      {
+        "feature": "crecimiento_matricula",
+        "importancia": 0.3027652018164687,
+        "std": 0.016859706906230773
+      },
+      {
+        "feature": "tasa_matricula_admitidos",
+        "importancia": 0.13495416772816948,
+        "std": 0.019229030140205782
+      },
+      {
+        "feature": "log_matriculados",
+        "importancia": 0.0462235945217766,
+        "std": 0.009053395729075738
+      },
+      {
+        "feature": "num_programas",
+        "importancia": 0.027968677005457798,
+        "std": 0.009274433822962757
+      },
+      {
+        "feature": "log_docentes",
+        "importancia": 0.01844506745047457,
+        "std": 0.002090182511988733
+      },
+      {
+        "feature": "departamento_norm",
+        "importancia": 0.018052947675515345,
+        "std": 0.0035652522592026763
+      },
+      {
+        "feature": "ratio_docente_estudiante",
+        "importancia": 0.006484265231021968,
+        "std": 0.009959944064380749
+      },
+      {
+        "feature": "tasa_admision",
+        "importancia": -0.0005103953713164448,
+        "std": 0.0019705464179548392
+      }
+    ]
+  },
+  "no_supervisado": {
+    "n_ies": 323,
+    "features": [
+      "log_matriculados",
+      "ratio_docente_estudiante",
+      "tasa_graduacion",
+      "num_programas"
+    ],
+    "k_silhouette": {
+      "2": 0.5390168637339349,
+      "3": 0.4466551808558816,
+      "4": 0.4715122852281246,
+      "5": 0.38401869085659807,
+      "6": 0.3787411674169779,
+      "7": 0.36786331811983647,
+      "8": 0.3751816068798802
+    },
+    "k_optimo_silhouette": 2,
+    "k_seleccionado": 3,
+    "comparacion": {
+      "kmeans_silhouette": 0.4466551808558816,
+      "agglomerative_silhouette": 0.4107536852006792,
+      "dbscan_silhouette": 0.6844783713877876,
+      "dbscan_n_clusters": 2,
+      "dbscan_ruido": 15
+    },
+    "perfiles": [
+      {
+        "cluster": 0,
+        "n_ies": 68,
+        "matriculados_med": 31323.5,
+        "docentes_med": 2488.333333333333,
+        "ratio_doc_est": 0.07734024605826756,
+        "tasa_graduacion": 0.11664272704289431,
+        "tasa_admision": 0.9100898728651412,
+        "num_programas": 133.0,
+        "arquetipo": "Mega-masivas"
+      },
+      {
+        "cluster": 1,
+        "n_ies": 226,
+        "matriculados_med": 4646.666666666666,
+        "docentes_med": 314.5,
+        "ratio_doc_est": 0.08185290782293089,
+        "tasa_graduacion": 0.11917721690390781,
+        "tasa_admision": 1.111451240026673,
+        "num_programas": 25.0,
+        "arquetipo": "Medianas tradicionales"
+      },
+      {
+        "cluster": 2,
+        "n_ies": 29,
+        "matriculados_med": 127.0,
+        "docentes_med": 43.333333333333336,
+        "ratio_doc_est": 0.45035289199832795,
+        "tasa_graduacion": 0.31135187099929595,
+        "tasa_admision": 1.1796296296296296,
+        "num_programas": 5.0,
+        "arquetipo": "Pequeñas especializadas"
+      }
+    ],
+    "nombres_arquetipo": {
+      "2": "Pequeñas especializadas",
+      "0": "Mega-masivas",
+      "1": "Medianas tradicionales"
+    }
+  }
+}

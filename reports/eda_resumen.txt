@@ -1,0 +1,69 @@
+======================================================================
+FASE 2 — EDA SNIES · Inicio del análisis
+======================================================================
+
+▶ SECCIÓN 1: SERIES DE TIEMPO
+  ✅ 01_series_tiempo_nacional.png
+  📊 Matriculados 2013: 4,116,418 → 2024: 5,026,633 (crecimiento: 22.1%)
+  ✅ 02_series_por_departamento.png
+  ✅ 03_serie_historica_completa.png
+
+▶ SECCIÓN 2: DISTRIBUCIONES Y CORRELACIONES
+  ✅ 04_distribucion_matriculados_ies.png
+  📊 IES con matrícula 2024: 323
+     Media: 15,562 | Mediana: 5,687 | Desv. Est.: 49,130
+     Min: 7 | Max: 754,608
+  ✅ 05_disparidades_regionales.png
+  📊 Top 3 deptos: Bogotá D.C., Antioquia, Valle del Cauca
+     Concentración Bogotá: 53.2%
+  ✅ 06_matricula_vs_graduacion.png
+
+  📋 ESTADÍSTICAS DESCRIPTIVAS COMPLETAS (2024):
+      categoria  registros     total   promedio  mediana   desv_std  minimo  maximo
+   matriculados      75175 5026633.0  66.865753     16.0 272.473031     1.0 38738.0
+      inscritos      59651 2272023.0  38.088599     10.0 187.694098     1.0 18914.0
+      admitidos      55049 1325834.0  24.084616      9.0 100.387194     1.0  8191.0
+   primer_curso      52874 1058036.0  20.010516      8.0  85.871125     1.0  7302.0
+      graduados      46540  547959.0  11.773936      5.0  56.507570     1.0 10436.0
+       docentes      16571  335909.0  20.270895      5.0  70.676560     1.0  3362.0
+administrativos        630  165247.0 262.296825    133.5 394.062332     2.0  3374.0
+  ✅ 07_correlaciones.png
+
+▶ SECCIÓN 3: TENDENCIAS Y ANOMALÍAS
+  ✅ 08_impacto_covid.png
+  📊 COVID — Caída matriculados 2020: -3.9%
+     COVID — Caída graduados 2020: -11.3%
+     COVID — Caída docentes 2020: -8.2%
+  ✅ 09_crecimiento_decrecimiento_ies.png
+  ✅ 10_covid_por_departamento.png
+  ✅ 11_ratio_docente_estudiante.png
+
+▶ SECCIÓN 4: PREPARACIÓN DE FEATURES PARA ML
+  Dataset base: 8805 filas × 13 columnas
+  ✅ Dataset de features guardado: data\dataset\features_ml.csv
+     Dimensiones: 8805 filas × 20 columnas
+     Años: 2000 - 2024
+     IES únicas: 410
+
+  📋 FEATURES CONSTRUIDAS:
+     inscritos: Total inscritos en la IES para el año [7600 valores no nulos]
+     admitidos: Total admitidos en la IES para el año [5592 valores no nulos]
+     matriculados: Total matriculados en la IES para el año [7722 valores no nulos]
+     primer_curso: Matriculados en primer curso [7386 valores no nulos]
+     graduados: Total graduados (disponible desde 2018) [2518 valores no nulos]
+     docentes: Total docentes en la IES [5424 valores no nulos]
+     administrativos: Total personal administrativo [4757 valores no nulos]
+     tasa_admision: admitidos / inscritos [4955 valores no nulos]
+     tasa_matricula_admitidos: matriculados / admitidos [5544 valores no nulos]
+     tasa_graduacion: graduados / matriculados (variable objetivo) [2317 valores no nulos]
+     ratio_docente_estudiante: docentes / matriculados [5312 valores no nulos]
+     ratio_admin_estudiante: administrativos / matriculados [4372 valores no nulos]
+     num_programas: Número de programas académicos [8476 valores no nulos]
+     crecimiento_matricula: Variación % interanual de matrícula [6528 valores no nulos]
+  ✅ 12_distribucion_features.png
+
+======================================================================
+EDA COMPLETADO
+Visualizaciones: reports\eda_visualizaciones
+Features ML: data\dataset\features_ml.csv
+======================================================================
